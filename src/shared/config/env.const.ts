@@ -40,6 +40,7 @@ const envSchema = z.object({
   SMTP_HOST_EMAIL: z.string().email(),
   SMTP_APP_PASS: z.string(),
   SMTP_FROM: z.string().email().optional(),
+  EMAIL_SECURE: z.string().default('false'),
 
   // Redis
   REDIS_HOST: z.string().min(1),
@@ -104,6 +105,7 @@ export const config = {
     email: env.SMTP_HOST_EMAIL,
     app_pass: env.SMTP_APP_PASS,
     from: env.SMTP_FROM || env.SMTP_HOST_EMAIL,
+    secure: env.EMAIL_SECURE,
   },
   redis: {
     host: env.REDIS_HOST,
