@@ -1,11 +1,8 @@
+import env from '@shared/config/env.const';
 import type { Knex } from 'knex';
 import path from 'path';
-import dotenv from 'dotenv';
-import env from '@shared/config/env.const';
 
-dotenv.config();
-
-const config: Knex.Config = {
+const dbConfig: Knex.Config = {
   client: 'pg',
 
   connection: {
@@ -32,4 +29,4 @@ const config: Knex.Config = {
   },
 };
 
-export default config;
+export default dbConfig;
