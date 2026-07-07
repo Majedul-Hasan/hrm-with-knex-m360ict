@@ -35,8 +35,11 @@ const envSchema = z.object({
   RESET_PASS_SECRET_EXPIRES_IN: z.string(),
 
   // Email
-  EMAIL: z.email(),
-  EMAIL_PASSWORD: z.string().optional(),
+  SMTP_HOST: z.string(),
+  SMTP_PORT: z.string(),
+  SMTP_HOST_EMAIL: z.string().email(),
+  SMTP_APP_PASS: z.string(),
+  SMTP_FROM: z.string().email().optional(),
 
   // Redis
   REDIS_HOST: z.string().min(1),
@@ -96,8 +99,11 @@ export const config = {
   },
 
   emailSender: {
-    email: env.EMAIL,
-    app_pass: env.EMAIL_PASSWORD,
+    host: env.SMTP_HOST,
+    port: Number(env.SMTP_PORT),
+    email: env.SMTP_HOST_EMAIL,
+    app_pass: env.SMTP_APP_PASS,
+    from: env.SMTP_FROM || env.SMTP_HOST_EMAIL,
   },
   redis: {
     host: env.REDIS_HOST,

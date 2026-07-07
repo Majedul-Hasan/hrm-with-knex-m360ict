@@ -4,11 +4,25 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "dev": "ts-node-dev -r tsconfig-paths/register --respawn --transpile-only --ignore-watch node_modules --ignore-watch dist src/server.ts",
+    "workers:dev": "ts-node-dev -r tsconfig-paths/register --respawn --transpile-only src/infrastructure/bullMQ/startWorkers.ts",
+    "dev:env": "cross-env NODE_ENV=development ts-node-dev --respawn --transpile-only --ignore-watch node_modules --ignore-watch dist src/server.ts",
+    "clean:queues": "ts-node -r tsconfig-paths/register --transpile-only src/infrastructure/bullMQ/queues/cleanQueues.ts",
+    "clean:queues:force": "ts-node -r tsconfig-paths/register  --transpile-only src/infrastructure/bullMQ/queues/cleanQueuesForce.ts",
+    "typecheck": "tsc --noEmit",
+    "build": "tsc && tsc-alias",
+    "start": "node dist/server.js",
+    "workers": "node dist/infrastructure/bullMQ/startWorkers.js",
+    "start:prod": "NODE_ENV=production node dist/server.js",
     "knex:migrate": "knex --knexfile src/infrastructure/persistence/knex/knexfile.ts migrate:latest",
     "knex:rollback": "knex --knexfile src/infrastructure/persistence/knex/knexfile.ts migrate:rollback",
     "knex:make": "knex --knexfile src/infrastructure/persistence/knex/knexfile.ts migrate:make",
     "knex:seed": "knex --knexfile src/infrastructure/persistence/knex/knexfile.ts seed:run",
-    "knex:seed:make": "knex --knexfile src/infrastructure/persistence/knex/knexfile.ts seed:make"
+    "knex:seed:make": "knex --knexfile src/infrastructure/persistence/knex/knexfile.ts seed:make",
+    "lint": "eslint \"src/**/*.{ts,js}\"",
+    "lint:fix": "eslint \"src/**/*.{ts,js}\" --fix",
+    "format": "prettier --write \"src/**/*.{ts,js,json}\"",
+    "format:check": "prettier --check \"src/**/*.{ts,js,json}\""
   },
   "keywords": [],
   "author": "",
@@ -27,6 +41,8 @@
     "morgan": "^1.11.0",
     "multer": "^2.2.0",
     "pg": "^8.22.0",
+    "winston": "^3.19.0",
+    "winston-daily-rotate-file": "^5.0.0",
     "zod": "^4.4.3"
   },
   "devDependencies": {
@@ -37,10 +53,14 @@
     "@types/morgan": "^1.9.10",
     "@types/multer": "^2.2.0",
     "@types/node": "^26.1.0",
+    "@types/pg": "^8.20.0",
     "eslint": "^10.6.0",
     "nodemon": "^3.1.14",
     "prettier": "^3.9.4",
     "ts-node": "^10.9.2",
+    "ts-node-dev": "^2.0.0",
+    "tsc-alias": "^1.9.0",
+    "tsconfig-paths": "^4.2.0",
     "typescript": "^6.0.3"
   }
 }
