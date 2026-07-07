@@ -4,7 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "knex:migrate": "knex --knexfile src/infrastructure/persistence/knex/knexfile.ts migrate:latest",
+    "knex:rollback": "knex --knexfile src/infrastructure/persistence/knex/knexfile.ts migrate:rollback",
+    "knex:make": "knex --knexfile src/infrastructure/persistence/knex/knexfile.ts migrate:make",
+    "knex:seed": "knex --knexfile src/infrastructure/persistence/knex/knexfile.ts seed:run",
+    "knex:seed:make": "knex --knexfile src/infrastructure/persistence/knex/knexfile.ts seed:make"
   },
   "keywords": [],
   "author": "",
@@ -21,7 +25,8 @@
     "knex": "^3.3.0",
     "morgan": "^1.11.0",
     "multer": "^2.2.0",
-    "pg": "^8.22.0"
+    "pg": "^8.22.0",
+    "zod": "^4.4.3"
   },
   "devDependencies": {
     "@types/bcrypt": "^6.0.0",
