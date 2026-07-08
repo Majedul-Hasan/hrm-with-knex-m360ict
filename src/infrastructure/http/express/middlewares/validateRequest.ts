@@ -1,9 +1,10 @@
 import { NextFunction, Request, Response } from 'express';
-import { ZodType } from 'zod';
-
-const validateRequest = (schema: ZodType) => async (req: Request, res: Response, next: NextFunction) => {
+export interface IRequestValidator {
+  validate(data: unknown): Promise<void>;
+}
+const validateRequest = (validator: IRequestValidator) => async (req: Request, res: Response, next: NextFunction) => {
   try {
-    await schema.parseAsync({
+    await validator.validate({
       body: req.body,
       query: req.query,
       params: req.params,
