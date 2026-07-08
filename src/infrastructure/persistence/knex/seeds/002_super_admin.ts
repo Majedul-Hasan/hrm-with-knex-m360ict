@@ -13,7 +13,7 @@ export async function seed(knex: Knex): Promise<void> {
 
   const passwordHash = await bcrypt.hash(
     process.env.SUPER_ADMIN_PASSWORD!,
-    Number(process.env.BCRYPT_SALT_ROUNDS || 10)
+    Number(process.env.BCRYPT_SALT_ROUNDS || 12)
   );
 
   await knex('user').insert({

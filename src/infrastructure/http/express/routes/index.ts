@@ -1,3 +1,4 @@
+import { authRoutes } from '@modules/auth';
 import { Router } from 'express';
 
 type ModuleRoute = {
@@ -8,10 +9,10 @@ type ModuleRoute = {
 const router = Router();
 
 const moduleRoutes: ModuleRoute[] = [
-  // {
-  //   path: '/auth',
-  //   route: AuthRoutes,
-  // },
+  {
+    path: '/auth',
+    route: authRoutes,
+  },
   // {
   //   path: '/hr/role',
   //   route: RoleRoutes,
