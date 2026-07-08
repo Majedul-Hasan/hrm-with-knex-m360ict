@@ -148,18 +148,7 @@ dist
 
 # End of https://www.toptal.com/developers/gitignore/api/node
 
-
-
-aiChat.queue.ts
-aiChat.worker.ts
-messagePersistenceWorkers.ts
-messagePersistenceQueue.ts
-
-notifications
-
-donotpush.ts
-generate-module.ts
-
 *copy*
 
-/scripts/
+scripts/*
+!scripts/start-postgres.ts
