@@ -2,6 +2,8 @@ import dotenv from 'dotenv';
 import path from 'path';
 import { z } from 'zod';
 
+console.log(process.cwd());
+
 dotenv.config({
   path: path.join(process.cwd(), '.env'),
 });
