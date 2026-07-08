@@ -27,5 +27,6 @@ export async function seed(knex: Knex): Promise<void> {
     created_at: new Date(),
     updated_at: new Date(),
     roleId: superAdminRole.id,
+    weeklyHolidayId: 1,
   });
 }
