@@ -47,6 +47,12 @@ export async function up(knex: Knex): Promise<void> {
 
     table.boolean('status').defaultTo(true);
 
+    table.string('resetPasswordToken');
+
+    table.timestamp('resetPasswordTokenExpiresAt');
+
+    table.timestamp('passwordChangedAt');
+
     table.timestamps(true, true);
   });
 }
