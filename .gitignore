@@ -152,3 +152,4 @@ dist
 
 scripts/*
 !scripts/start-postgres.ts
+!scripts/create-db.ts
