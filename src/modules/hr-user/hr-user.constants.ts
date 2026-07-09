@@ -29,12 +29,12 @@ export const HR_USER_SELECT_COLUMNS = [
   'updatedAt',
 ] as const;
 export const HR_USER_MESSAGES = {
-  CREATED: 'User created successfully.',
-  UPDATED: 'User updated successfully.',
-  DELETED: 'User deleted successfully.',
-  RETRIEVED: 'User retrieved successfully.',
-  LIST_RETRIEVED: 'Users retrieved successfully.',
-  STATUS_UPDATED: 'User status updated successfully.',
-  ROLE_ASSIGNED: 'User role assigned successfully.',
+  CREATED: 'Employee created successfully.',
+  UPDATED: 'Employee updated successfully.',
+  DELETED: 'Employee deleted successfully.',
+  RETRIEVED: 'Employee retrieved successfully.',
+  LIST_RETRIEVED: 'Employees  retrieved successfully.',
+  STATUS_UPDATED: 'Employee status updated successfully.',
+  ROLE_ASSIGNED: 'Employee role assigned successfully.',
   PROFILE_RETRIEVED: 'Profile retrieved successfully.',
 } as const;

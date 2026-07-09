@@ -10,6 +10,7 @@ import {
   listHrUsersSchema,
   changeUserStatusSchema,
   assignRoleSchema,
+  CreateEmployeeDto,
 } from './hr-user.validation';
 import { authMiddleware } from '@infra/http/express/middlewares/auth.middleware';
 import validateRequest from '@infra/http/express/middlewares/validateRequest';
@@ -18,7 +19,7 @@ import { JoiValidator } from '@shared/validator/joi.validator';
 export const createHrUserRoutes = (controller: HrUserController) => {
   const router = Router();
 
-  router.post('/', authMiddleware(), validateRequest(new JoiValidator(createHrUserSchema)), controller.create);
+  router.post('/', authMiddleware(), validateRequest(new JoiValidator(CreateEmployeeDto)), controller.create);
 
   router.get('/', authMiddleware(), validateRequest(new JoiValidator(listHrUsersSchema)), controller.list);
 

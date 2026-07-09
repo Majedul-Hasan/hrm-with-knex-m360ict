@@ -51,7 +51,7 @@ export class HrUserMapper {
           }
         : null,
 
-      joinedAt: user.joined_at ?? null,
+      joinedAt: user.joinDate ?? null,
 
       lastLoginAt: user.lastLogin_at ?? null,
     };

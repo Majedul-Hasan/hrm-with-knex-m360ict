@@ -44,7 +44,7 @@ export interface HrUserResponse {
   status: string;
   isBlocked: boolean;
   isEmailVerified: boolean;
-  createdAt: Date;
+  created_at: Date;
 }
 
 export interface UserModel {
@@ -53,6 +53,8 @@ export interface UserModel {
   firstName: string;
   lastName: string;
   email: string;
+  passwordHash: string;
+  userName?: string;
   phone: string | null;
   password: string;
   roleId: string;
@@ -64,11 +66,11 @@ export interface UserModel {
   managerId: string | null;
   managerName?: string;
   avatar: string | null;
-  status: 'ACTIVE' | 'INACTIVE' | 'SUSPENDED';
+  status: boolean;
   isBlocked: boolean;
   isEmailVerified: boolean;
   lastLoginAt: Date | null;
-  createdAt: Date;
-  updatedAt: Date;
-  deletedAt: Date | null;
+  created_at: Date;
+  updated_at: Date;
+  deleted_at: Date | null;
 }

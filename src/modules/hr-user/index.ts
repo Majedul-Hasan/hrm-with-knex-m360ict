@@ -4,11 +4,13 @@ import { HrUserService } from './hr-user.service';
 import { createHrUserRoutes } from './hr-user.routes';
 import { BcryptPasswordHasher } from '@shared/security/bcrypt-password-hasher';
 import config from '@shared/config/env.const';
+import { EmployeeRepository } from '@infra/persistence/repositories/employee.repository';
 
-const repository = new HrUserRepository();
+const hrUserRepository = new HrUserRepository();
+const employeeRepository = new EmployeeRepository();
 const hasher = new BcryptPasswordHasher(config.bcrypt_salt_rounds);
 
-const service = new HrUserService(repository, hasher);
+const service = new HrUserService(hrUserRepository, employeeRepository, hasher);
 
 const controller = new HrUserController(service);
 

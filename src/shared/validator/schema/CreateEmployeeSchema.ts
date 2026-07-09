@@ -1,0 +1,27 @@
+import Joi from 'joi';
+
+export const CreateEmployeeSchema = Joi.object({
+  employeeId: Joi.string().trim().required(),
+  firstName: Joi.string().trim().required(),
+  lastName: Joi.string().trim().allow('', null),
+  email: Joi.string().email().required(),
+  phone: Joi.string().trim().allow('', null),
+  street: Joi.string().trim().allow('', null),
+  city: Joi.string().trim().allow('', null),
+  state: Joi.string().trim().allow('', null),
+  zipCode: Joi.string().trim().allow('', null),
+  country: Joi.string().trim().allow('', null),
+  dateOfBirth: Joi.date().required(),
+  joinDate: Joi.date().optional(),
+  leaveDate: Joi.date().allow(null),
+  salary: Joi.number().precision(2).required(),
+  bloodGroup: Joi.string().trim().allow('', null),
+  profileImage: Joi.string().trim().allow('', null),
+  roleId: Joi.number().integer().required(),
+  employmentStatusId: Joi.number().integer().allow(null),
+  departmentId: Joi.number().integer().allow(null),
+  designationId: Joi.number().integer().allow(null),
+  weeklyHolidayId: Joi.number().integer().allow(null),
+  userName: Joi.string().trim().allow('', null),
+  password: Joi.string().min(8).allow('', null),
+});

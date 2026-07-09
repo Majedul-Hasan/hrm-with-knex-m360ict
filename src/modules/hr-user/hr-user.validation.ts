@@ -1,4 +1,35 @@
+import { CreateEmployeeSchema } from '@shared/validator/schema/CreateEmployeeSchema';
 import Joi from 'joi';
+
+export const CreateEmployeeDto = Joi.object({
+  body: CreateEmployeeSchema,
+});
+
+export interface CreateEmployeeDto {
+  employeeId: string;
+  firstName: string;
+  lastName?: string;
+  email: string;
+  phone?: string;
+  street?: string;
+  city?: string;
+  state?: string;
+  zipCode?: string;
+  country?: string;
+  dateOfBirth: Date;
+  joinDate: Date;
+  leaveDate?: Date;
+  salary: number;
+  bloodGroup?: string;
+  profileImage?: string;
+  roleId: number;
+  employmentStatusId?: number;
+  departmentId?: number;
+  designationId?: number;
+  weeklyHolidayId?: number;
+  userName?: string;
+  password?: string;
+}
 
 export const createHrUserSchema = Joi.object({
   body: Joi.object({
