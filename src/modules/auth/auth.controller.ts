@@ -1,5 +1,3 @@
-// src/modules/auth/auth.controller.ts
-
 import { Request, Response } from 'express';
 import status from 'http-status';
 
@@ -27,7 +25,7 @@ export class AuthController {
     sendResponse(res, {
       statusCode: status.OK,
       success: true,
-      message: 'A password reset email with otp has been sent.',
+      message: 'If an account exists, a password reset email has been sent.',
     });
   });
 

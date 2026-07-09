@@ -21,6 +21,7 @@ import config from '@shared/config/env.const';
 import { AuthMapper } from './auth.mapper';
 import { otpQueueEmail } from '@infra/bullMQ/queues/mailQueues';
 import { AuthUtils } from './auth.utils';
+import db from '@infra/persistence/knex/knex';
 
 export class AuthService {
   constructor(
@@ -64,9 +65,9 @@ export class AuthService {
   public async forgotPassword(payload: ForgotPasswordDto): Promise<void> {
     const user = await this.authRepository.findByEmail(payload.email);
 
-    // Don't reveal whether the email exists
     if (!user) {
-      throw new UserNotFoundError();
+      // throw new UserNotFoundError();
+      return;
     }
     const resetToken = AuthUtils.generateResetToken();
     const hashedToken = AuthUtils.hashResetToken(resetToken);
@@ -93,6 +94,13 @@ export class AuthService {
       }
     );
   }
+  private async isSameAsOld(payload: { password: string; passwordHash: string }) {
+    const samePassword = await this.passwordHasher.compare(payload.password, payload.passwordHash);
+
+    if (samePassword) {
+      throw new BadRequestError('New password must be different from the current password.');
+    }
+  }
 
   public async resetPassword(payload: ResetPasswordDto): Promise<void> {
     if (payload.password !== payload.confirmPassword) {
@@ -110,12 +118,17 @@ export class AuthService {
     if (!user.resetPasswordTokenExpiresAt || new Date(user.resetPasswordTokenExpiresAt) < new Date()) {
       throw new TokenExpiredError('Password reset token has expired.');
     }
-
+    this.isSameAsOld({ password: payload.password, passwordHash: user.passwordHash });
     const passwordHash = await this.passwordHasher.hash(payload.password);
 
-    await this.authRepository.updatePassword(user.id, passwordHash);
+    // await this.authRepository.updatePassword(user.id, passwordHash);
 
-    await this.authRepository.clearResetToken(user.id);
+    // await this.authRepository.clearResetToken(user.id);
+    await db.transaction(async trx => {
+      await this.authRepository.updatePassword(user.id, passwordHash, trx);
+
+      await this.authRepository.clearResetToken(user.id, trx);
+    });
   }
 
   public async changePassword(userId: number, payload: ChangePasswordDto): Promise<void> {
@@ -134,7 +147,7 @@ export class AuthService {
     if (!isMatched) {
       throw new InvalidCredentialsError('Old password is incorrect.');
     }
-
+    this.isSameAsOld({ password: payload.newPassword, passwordHash: user.passwordHash });
     const passwordHash = await this.passwordHasher.hash(payload.newPassword);
 
     await this.authRepository.updatePassword(user.id, passwordHash);
