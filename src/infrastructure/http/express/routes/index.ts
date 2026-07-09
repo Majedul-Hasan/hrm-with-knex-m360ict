@@ -1,4 +1,5 @@
 import { authRoutes } from '@modules/auth';
+import { hrUserRoutes } from '@modules/hr-user';
 import { Router } from 'express';
 
 type ModuleRoute = {
@@ -12,6 +13,10 @@ const moduleRoutes: ModuleRoute[] = [
   {
     path: '/auth',
     route: authRoutes,
+  },
+  {
+    path: '/hr/user',
+    route: hrUserRoutes,
   },
   // {
   //   path: '/hr/role',

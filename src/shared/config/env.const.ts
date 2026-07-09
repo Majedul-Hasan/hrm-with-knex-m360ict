@@ -22,6 +22,7 @@ const envSchema = z.object({
 
   AI_END_POINT: z.string().optional(),
   SUPER_ADMIN_PASSWORD: z.string().min(1),
+  DEFAULT_PASSWORD: z.string().min(1),
 
   BCRYPT_SALT_ROUNDS: z.string().default('10'),
   OTP_ACCESS_EXPIRES_IN: z.string().default('5'),
@@ -88,6 +89,7 @@ export const config = {
   port: Number(env.PORT),
   host_url: env.HOST_URL,
   super_admin_password: env.SUPER_ADMIN_PASSWORD,
+  default_password: env.DEFAULT_PASSWORD,
   bcrypt_salt_rounds: Number(env.BCRYPT_SALT_ROUNDS || 12),
   otp_expiry_time: Number(env.OTP_ACCESS_EXPIRES_IN),
   tax_code: env.TAX_CODE,
