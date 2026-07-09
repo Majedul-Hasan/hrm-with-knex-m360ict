@@ -1,6 +1,7 @@
 import { authRoutes } from '@modules/auth';
 import { departmentRoutes } from '@modules/department';
 import { hrUserRoutes } from '@modules/hr-user';
+import { roleRoutes } from '@modules/Role';
 import { Router } from 'express';
 
 type ModuleRoute = {
@@ -22,6 +23,10 @@ const moduleRoutes: ModuleRoute[] = [
   {
     path: '/hr/department',
     route: departmentRoutes,
+  },
+  {
+    path: '/hr/role',
+    route: roleRoutes,
   },
   // {
   //   path: '/hr/permissions',
