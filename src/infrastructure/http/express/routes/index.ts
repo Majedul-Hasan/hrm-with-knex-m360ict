@@ -1,6 +1,7 @@
 import { authRoutes } from '@modules/auth';
 import { departmentRoutes } from '@modules/department';
 import { designationRoutes } from '@modules/Designation';
+import { employmentStatusRoutes } from '@modules/employmentStatus';
 import { hrUserRoutes } from '@modules/hr-user';
 import { roleRoutes } from '@modules/Role';
 import { Router } from 'express';
@@ -33,10 +34,10 @@ const moduleRoutes: ModuleRoute[] = [
     path: '/hr/designation',
     route: designationRoutes,
   },
-  // {
-  //   path: '/hr/permissions',
-  //   route: permissionsRoutes,
-  // },
+  {
+    path: '/hr/employment-status',
+    route: employmentStatusRoutes,
+  },
   // {
   //   path: '/inventory/brand',
   //   route: ProductBrandRoutes,
