@@ -4,8 +4,6 @@ export async function up(knex: Knex): Promise<void> {
   await knex.schema.createTable('attendance', table => {
     table.increments('id').primary();
 
-    table.integer('userId').unsigned().notNullable().references('id').inTable('user').onDelete('CASCADE');
-
     table.date('attendanceDate').notNullable();
 
     table.timestamp('checkInTime').notNullable();
@@ -18,7 +16,7 @@ export async function up(knex: Knex): Promise<void> {
 
     table.integer('punchBy').unsigned();
 
-    table.float('totalHour');
+    table.decimal('totalHour', 5, 2);
 
     table.string('inTimeStatus');
 
@@ -28,7 +26,9 @@ export async function up(knex: Knex): Promise<void> {
 
     table.timestamps(true, true);
 
-    table.unique(['userId', 'attendanceDate']);
+    table.integer('employeeId').unsigned().notNullable().references('id').inTable('employee').onDelete('CASCADE');
+
+    table.unique(['employeeId', 'attendanceDate']);
   });
 }
 
