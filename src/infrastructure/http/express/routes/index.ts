@@ -1,3 +1,4 @@
+import { attendanceRoutes } from '@modules/attendance';
 import { authRoutes } from '@modules/auth';
 import { departmentRoutes } from '@modules/department';
 import { designationRoutes } from '@modules/Designation';
@@ -38,10 +39,10 @@ const moduleRoutes: ModuleRoute[] = [
     path: '/hr/employment-status',
     route: employmentStatusRoutes,
   },
-  // {
-  //   path: '/inventory/brand',
-  //   route: ProductBrandRoutes,
-  // },
+  {
+    path: '/attendance',
+    route: attendanceRoutes,
+  },
   // {
   //   path: '/inventory/category',
   //   route: CategoryRoutes,

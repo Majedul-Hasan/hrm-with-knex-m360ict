@@ -6,9 +6,9 @@ export async function up(knex: Knex): Promise<void> {
 
     table.date('attendanceDate').notNullable();
 
-    table.timestamp('checkInTime').notNullable();
+    table.time('checkInTime').notNullable();
 
-    table.timestamp('checkOutTime');
+    table.time('checkOutTime');
 
     table.string('ip');
 
