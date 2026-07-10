@@ -7,6 +7,8 @@ dotenv.config();
 import morgan from 'morgan';
 app.use(morgan('dev'));
 
+import path from 'path';
+
 import cors from 'cors';
 import stream from '@infra/logging/stream';
 import globalErrorHandler from '@infra/http/express/middlewares/globalErrorHandler';
@@ -18,7 +20,7 @@ app.use((req, res, next) => {
   res.header('Access-Control-Allow-Headers', 'X-Requested-With');
   next();
 });
-
+app.set('trust proxy', 1);
 app.use(morgan('combined', { stream }));
 //middleware
 app.use(express.json());
@@ -29,6 +31,20 @@ if (process.env.NODE_ENV === 'development') {
 } else {
   app.get('/', (req, res) => res.status(200).send('production'));
 }
+
+app.get('/health', (_req, res) => {
+  let uptime = process.uptime();
+
+  res.status(200).json({
+    status: 'ok',
+    uptime: `${Math.floor(uptime / 60)} minutes ${Math.floor(uptime % 60)} seconds`,
+    timestamp: Date.now(),
+  });
+});
+
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(process.cwd(), 'public')));
+app.use('/uploads', express.static(path.join(process.cwd(), 'public', 'uploads')));
 
 app.use('/api/v1', router);
 

@@ -3,9 +3,7 @@ import { Router } from 'express';
 import { HrUserController } from './hr-user.controller';
 
 import {
-  createHrUserSchema,
   updateHrUserSchema,
-  getHrUserSchema,
   deleteHrUserSchema,
   listHrUsersSchema,
   changeUserStatusSchema,
@@ -15,11 +13,20 @@ import {
 import { authMiddleware } from '@infra/http/express/middlewares/auth.middleware';
 import validateRequest from '@infra/http/express/middlewares/validateRequest';
 import { JoiValidator } from '@shared/validator/joi.validator';
+import { fileUploader } from '@infra/http/express/middlewares/uploadImage.middleware';
+import { parseBodyData } from '@infra/http/express/middlewares/parseBodyData';
 
 export const createHrUserRoutes = (controller: HrUserController) => {
   const router = Router();
 
-  router.post('/', authMiddleware(), validateRequest(new JoiValidator(CreateEmployeeDto)), controller.create);
+  router.post(
+    '/',
+    authMiddleware(),
+    fileUploader.profileImage,
+    parseBodyData,
+    validateRequest(new JoiValidator(CreateEmployeeDto)),
+    controller.create
+  );
 
   router.get('/', authMiddleware(), validateRequest(new JoiValidator(listHrUsersSchema)), controller.list);
 
@@ -32,7 +39,14 @@ export const createHrUserRoutes = (controller: HrUserController) => {
     controller.getById
   );
 
-  router.patch('/:id', authMiddleware(), validateRequest(new JoiValidator(updateHrUserSchema)), controller.update);
+  router.patch(
+    '/:id',
+    authMiddleware(),
+    fileUploader.profileImage,
+    parseBodyData,
+    validateRequest(new JoiValidator(updateHrUserSchema)),
+    controller.update
+  );
 
   router.delete('/:id', authMiddleware(), validateRequest(new JoiValidator(deleteHrUserSchema)), controller.delete);
 

@@ -40,8 +40,8 @@ export const uploadDisk = multer({
   },
 });
 
-const productImage = uploadDisk.single('image');
+const profileImage = uploadDisk.single('image');
 
 export const fileUploader = {
-  productImage,
+  profileImage,
 };

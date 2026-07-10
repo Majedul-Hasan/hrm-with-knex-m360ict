@@ -10,7 +10,18 @@ export class HrUserController {
   constructor(private readonly service: HrUserService) {}
 
   create = catchAsync(async (req: Request, res: Response) => {
-    const result = await this.service.create(req.body);
+    const protocol = req.protocol;
+    const host = req.get('host');
+    const origin = `${protocol}://${host}`;
+    const file: Express.Multer.File | undefined = req.file;
+    const payload = req.body;
+    const result = await this.service.create(
+      {
+        ...payload,
+        file,
+      },
+      origin
+    );
 
     sendResponse(res, {
       statusCode: 201,
@@ -45,7 +56,20 @@ export class HrUserController {
   });
 
   update = catchAsync(async (req: Request, res: Response) => {
-    const result = await this.service.update(req.params.id as string, req.body);
+    const protocol = req.protocol;
+    const host = req.get('host');
+    const origin = `${protocol}://${host}`;
+    const file: Express.Multer.File | undefined = req.file;
+    const payload = req.body;
+
+    const result = await this.service.update(
+      req.params.id as string,
+      {
+        ...payload,
+        file,
+      },
+      origin
+    );
 
     sendResponse(res, {
       statusCode: 200,

@@ -15,6 +15,7 @@ export class HrUserMapper {
           }
         : null,
       status: user.status,
+      profileImage: user.profileImage,
       isBlocked: user.isBlocked,
       isEmailVerified: user.isEmailVerified,
       createdAt: user.createdAt,
