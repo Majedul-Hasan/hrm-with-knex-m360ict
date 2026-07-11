@@ -12,7 +12,7 @@ export const createReportRoutes = (controller: ReportController) => {
   router.get(
     '/attendance',
 
-    authMiddleware(),
+    authMiddleware('SUPER_ADMIN', 'HR_ADMIN', 'MANAGER'),
 
     validateRequest(new JoiValidator(attendanceReportSchema)),
 

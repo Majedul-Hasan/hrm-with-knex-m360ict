@@ -12,15 +12,30 @@ import { attendanceFilterSchema, createAttendanceSchema, updateAttendanceSchema 
 export const createAttendanceRoutes = (controller: AttendanceController) => {
   const router = Router();
 
-  router.get('/', authMiddleware(), validateRequest(new JoiValidator(attendanceFilterSchema)), controller.list);
+  router.get(
+    '/',
+    authMiddleware('SUPER_ADMIN', 'HR_ADMIN', 'MANAGER'),
+    validateRequest(new JoiValidator(attendanceFilterSchema)),
+    controller.list
+  );
 
-  router.get('/:id', authMiddleware(), controller.getById);
+  router.get('/:id', authMiddleware('SUPER_ADMIN', 'HR_ADMIN', 'MANAGER'), controller.getById);
 
-  router.post('/', authMiddleware(), validateRequest(new JoiValidator(createAttendanceSchema)), controller.create);
+  router.post(
+    '/',
+    authMiddleware('SUPER_ADMIN', 'HR_ADMIN', 'MANAGER'),
+    validateRequest(new JoiValidator(createAttendanceSchema)),
+    controller.create
+  );
 
-  router.put('/:id', authMiddleware(), validateRequest(new JoiValidator(updateAttendanceSchema)), controller.update);
+  router.put(
+    '/:id',
+    authMiddleware('SUPER_ADMIN', 'HR_ADMIN', 'MANAGER'),
+    validateRequest(new JoiValidator(updateAttendanceSchema)),
+    controller.update
+  );
 
-  router.delete('/:id', authMiddleware(), controller.delete);
+  router.delete('/:id', authMiddleware('SUPER_ADMIN', 'HR_ADMIN', 'MANAGER'), controller.delete);
 
   return router;
 };

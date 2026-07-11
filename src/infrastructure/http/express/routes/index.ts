@@ -25,6 +25,10 @@ const moduleRoutes: ModuleRoute[] = [
     route: hrUserRoutes,
   },
   {
+    path: '/hr/employee',
+    route: hrUserRoutes,
+  },
+  {
     path: '/hr/department',
     route: departmentRoutes,
   },

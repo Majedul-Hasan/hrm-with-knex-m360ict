@@ -21,45 +21,59 @@ export const createHrUserRoutes = (controller: HrUserController) => {
 
   router.post(
     '/',
-    authMiddleware(),
+    authMiddleware('SUPER_ADMIN', 'HR_ADMIN'),
     fileUploader.profileImage,
     parseBodyData,
     validateRequest(new JoiValidator(CreateEmployeeDto)),
     controller.create
   );
 
-  router.get('/', authMiddleware(), validateRequest(new JoiValidator(listHrUsersSchema)), controller.list);
+  router.get(
+    '/',
+    authMiddleware('SUPER_ADMIN', 'HR_ADMIN'),
+    validateRequest(new JoiValidator(listHrUsersSchema)),
+    controller.list
+  );
 
-  router.get('/me', authMiddleware(), controller.me);
+  router.get('/me', authMiddleware('SUPER_ADMIN', 'HR_ADMIN'), controller.me);
 
   router.get(
     '/:id',
-    authMiddleware(),
+    authMiddleware('SUPER_ADMIN', 'HR_ADMIN'),
+
     //  validateRequest(new JoiValidator(getHrUserSchema)),
     controller.getById
   );
 
   router.patch(
     '/:id',
-    authMiddleware(),
+    authMiddleware('SUPER_ADMIN', 'HR_ADMIN'),
+
     fileUploader.profileImage,
     parseBodyData,
     validateRequest(new JoiValidator(updateHrUserSchema)),
     controller.update
   );
 
-  router.delete('/:id', authMiddleware(), validateRequest(new JoiValidator(deleteHrUserSchema)), controller.delete);
+  router.delete(
+    '/:id',
+    authMiddleware('SUPER_ADMIN', 'HR_ADMIN'),
+    validateRequest(new JoiValidator(deleteHrUserSchema)),
+    controller.delete
+  );
 
   router.patch(
     '/:id/status',
-    authMiddleware(),
+    authMiddleware('SUPER_ADMIN', 'HR_ADMIN'),
+
     validateRequest(new JoiValidator(changeUserStatusSchema)),
     controller.changeStatus
   );
 
   router.patch(
     '/:id/role',
-    authMiddleware(),
+    authMiddleware('SUPER_ADMIN', 'HR_ADMIN'),
+
     validateRequest(new JoiValidator(assignRoleSchema)),
     controller.assignRole
   );

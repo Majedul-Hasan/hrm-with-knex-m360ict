@@ -1,11 +1,11 @@
 import http from 'http';
 
-import app from '@app/index';
 import config from '@shared/config/env.const';
 
 import { connectDatabase, disconnectDatabase } from '@infra/persistence/knex/database';
 import logger from '@infra/logging/logger';
 import redisConnect from '@infra/cache/redis/redis';
+import app from './app';
 
 const PORT = config.port ?? 5001;
 
