@@ -1,6 +1,6 @@
 import http from 'http';
 
-import app from '@app/index.ts';
+import app from '@app/index';
 import config from '@shared/config/env.const';
 
 import { connectDatabase, disconnectDatabase } from '@infra/persistence/knex/database';
