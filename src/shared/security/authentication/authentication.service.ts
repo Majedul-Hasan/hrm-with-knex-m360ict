@@ -15,15 +15,15 @@ export class AuthenticationService {
     if (!user) {
       throw new UnauthorizedError('User not found');
     }
-    if (user.isBlocked) {
-      throw new ForbiddenError('Account is blocked');
+    if (!user.status) {
+      throw new ForbiddenError('Account is inactive');
     }
     return {
       id: user.id,
       email: user.email,
       userName: user.userName,
       roleId: user.roleId,
-      roleName: user.roleName,
+      roleName: user.roleName as string,
     };
   }
 }

@@ -11,8 +11,8 @@ export class NodemailerEmailProvider implements EmailProvider {
     port: Number(config.emailSender.port),
     secure: config.emailSender.secure === 'true',
     auth: {
-      user: config.emailSender.user,
-      pass: config.emailSender.password,
+      user: config.emailSender.email,
+      pass: config.emailSender.app_pass,
     },
   };
   private transporter = nodemailer.createTransport(this.transportOptions);
