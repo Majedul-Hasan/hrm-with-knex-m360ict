@@ -4,7 +4,7 @@ import { authMiddleware } from '@infra/http/express/middlewares/auth.middleware'
 
 import { RoleController } from './role.controller';
 
-export const createDepartmentRoutes = (controller: RoleController) => {
+export const createRoleRoutes = (controller: RoleController) => {
   const router = Router();
   router.get(
     '/',

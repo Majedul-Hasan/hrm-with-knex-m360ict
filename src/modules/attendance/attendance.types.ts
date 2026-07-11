@@ -68,7 +68,7 @@ export interface UpdateAttendanceDto {
 }
 
 export interface AttendanceFilter {
-  employeeId?: number;
+  employee_id?: number;
   from?: string;
   to?: string;
   search?: string;

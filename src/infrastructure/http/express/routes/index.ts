@@ -4,6 +4,7 @@ import { departmentRoutes } from '@modules/department';
 import { designationRoutes } from '@modules/Designation';
 import { employmentStatusRoutes } from '@modules/employmentStatus';
 import { hrUserRoutes } from '@modules/hr-user';
+import { reportRoutes } from '@modules/report';
 import { roleRoutes } from '@modules/Role';
 import { Router } from 'express';
 
@@ -43,10 +44,10 @@ const moduleRoutes: ModuleRoute[] = [
     path: '/attendance',
     route: attendanceRoutes,
   },
-  // {
-  //   path: '/inventory/category',
-  //   route: CategoryRoutes,
-  // },
+  {
+    path: '/report',
+    route: reportRoutes,
+  },
 ];
 moduleRoutes.forEach(route => router.use(route.path, route.route));
 

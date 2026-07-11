@@ -29,8 +29,8 @@ export class AttendanceRepository extends BaseRepository<Attendance> {
 
     const qb = query(this.table);
 
-    if (filter.employeeId) {
-      qb.where('employeeId', filter.employeeId);
+    if (filter.employee_id) {
+      qb.where('employeeId', filter.employee_id);
     }
 
     if (filter.from) {
@@ -57,8 +57,8 @@ export class AttendanceRepository extends BaseRepository<Attendance> {
 
     const qb = query(this.table);
 
-    if (filter.employeeId) {
-      qb.where('employeeId', filter.employeeId);
+    if (filter.employee_id) {
+      qb.where('employeeId', filter.employee_id);
     }
 
     if (filter.from) {

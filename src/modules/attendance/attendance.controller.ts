@@ -8,7 +8,7 @@ import sendResponse from '@infra/http/express/utils/sendResponse';
 export class AttendanceController {
   constructor(private readonly attendanceService: AttendanceService) {}
   list = catchAsync(async (req: Request, res: Response): Promise<void> => {
-    const options: any = pickValidFields(req.query, ['limit', 'page', 'search']);
+    const options: any = pickValidFields(req.query, ['limit', 'page', 'search', 'employee_id', 'from', 'to']);
 
     const data = await this.attendanceService.list(options);
     const meta = await this.attendanceService.count(options);
